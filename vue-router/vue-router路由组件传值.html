@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue-router路由组件传值</title>
+    <script src="./vue.js"></script>
+    <script src="./vue-router.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <router-link to="/">去首页</router-link>
+        <router-link to="/list/one">Go one</router-link>
+        <router-link to="/list/two">Go two</router-link>
+        <router-link to="/ss/one">Go one</router-link>
+        <router-link to="/ss/two">Go two</router-link>
+        <router-view></router-view>
+    </div>
+    <script>
+        var changeId = {
+            template: `<div>{{item}}</div>`,
+            props: ['item']
+        }
+        var router = new VueRouter({
+            routes: [
+                {
+                    path: '/',
+                    component: {
+                        template: '<div>首页</div>'
+                    }
+                },
+                {
+                    path: '/list',
+                    component: {
+                        template: '<div>list页</div>'
+                    }
+                },
+                {
+                    path: '/list/:item',
+                    component: changeId,
+                    props:true
+                },
+                {
+                    path: '/ss/:item',
+                    component: changeId,
+                    props:true
+                }
+            ]
+        })
+        var app = new Vue({
+            router
+        }).$mount('#app')
+    </script>
+</body>
+
+</html>

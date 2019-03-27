@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue-router基础使用</title>
+    <script src="./vue.js"></script>
+    <script src="./vue-router.js"></script>
+</head>
+<body>
+    <div id="app">
+        <router-link to="/">去首页</router-link>
+        <router-link to="/list">去list页</router-link>
+        <router-view></router-view>
+    </div>
+    <script>
+        var router = new VueRouter({
+            routes:[
+                {path:'/',component:{ template: '<div>首页</div>' }},
+                {path:'/list',component:{ template: '<div>list页</div>' }}
+            ]
+        })
+     var app = new Vue({
+         router
+     }).$mount('#app')
+    </script>
+</body>
+</html>

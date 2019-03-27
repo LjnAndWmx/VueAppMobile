@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue-router命名路由&视图</title>
+    <!-- 命名路由和命名视图是为了让我们获得更加细粒化的控制能力，在进行渲染时，能够更好的把控内容 -->
+    <script src="./vue.js"></script>
+    <script src="./vue-router.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <!-- <router-link to="/">去首页</router-link>
+        <router-link to="/list">去list页</router-link> -->
+        <router-link :to="{name:'index'}">去list页</router-link>
+        <!-- <router-link to="/">去首页</router-link> -->
+        <router-view name="name"></router-view>
+    </div>
+    <script>
+        var router = new VueRouter({
+            routes: [
+                {
+                    path: '/',
+                    name:'index',
+                    components: {
+                        name:{
+                            template: `<div>
+                                首页
+                                <div>name</div>
+                                </div>`
+                        },
+                        info:{
+                            template: `<div>
+                                首页
+                                <div>name</div>
+                                <div>评论</div>
+                                </div>`
+                        }
+                    }
+                }
+            ]
+        })
+        var app = new Vue({
+            router
+        }).$mount('#app')
+    </script>
+</body>
+
+</html>

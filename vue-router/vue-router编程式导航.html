@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue-router编程式导航</title>
+    <script src="./vue.js"></script>
+    <script src="./vue-router.js"></script>
+</head>
+<body>
+    <div id="app">
+        <router-link to="/">去首页</router-link>
+        <router-link to="/list">去list页</router-link>
+        <router-link to="/list/one">Go one</router-link>
+        <router-link to="/list/two">Go two</router-link>
+        <router-view></router-view>
+        <button @click="change">切换</button>
+    </div>
+    <script>
+        var router = new VueRouter({
+            routes:[
+                {path:'/',component:{ template: '<div>首页</div>' }},
+                {path:'/list',component:{ template: '<div>list页</div>' }},
+                // 通过动态参数来实现动态路由
+                {path:'/list/:item',component:{ template: '<div>{{$route.params.item}}</div>' }}
+            ]
+        })
+     var app = new Vue({
+         router,
+         methods:{
+             change:function(){
+                setTimeout(function(){
+                    this.router.push('/list/two')
+                    setTimeout(function(){
+                        this.router.replace('/list/one')
+                    }, 1000);
+                }, 1000);
+                this.$router.go(-1)
+             }
+         }
+     }).$mount('#app')
+    </script>
+</body>
+</html>
