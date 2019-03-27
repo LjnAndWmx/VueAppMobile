@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue使用之循环渲染</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <ul>
+            <!-- 数组循环渲染 -->
+            <li v-for="(item,index) of list">{{item}}>>>>{{index}}</li>
+            <!-- 对象循环渲染 -->
+            <li v-for="(item,index,key) of student">{{item}}>>>>{{index}}>>>>>{{key}}</li>
+        </ul>
+    </div>
+    <script>
+     var app = new Vue({
+        el:"#app",
+        data:{
+            list:[1,2,3,4],
+            student:{
+                name:'xiaoming',
+                age:8
+            }
+        }
+     })
+    </script>
+</body>
+</html>

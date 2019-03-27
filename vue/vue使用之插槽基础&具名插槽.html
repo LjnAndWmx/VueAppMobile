@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue使用之插槽基础&具名插槽</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <boy>
+            <h1 slot="title">hello</h1>
+            <h2>hahahahah</h2>
+        </boy>
+        <!-- 插槽的作用：为了接收组件中传来的dom结构 slot标签，如果没有name那么h1和h2显示在同一个位置；引用具名插槽，可以指定位置进行插槽-->
+    </div>
+    <script>
+        Vue.component('boy',{
+            template:`
+            <div>
+                <slot></slot>
+                <h1> hello ,51自学网</h1>
+                <h1> hello</h1>
+                <slot name="title"></slot>
+                <h1> 51自学网</h1>
+            </div>
+            `
+        })
+        var app = new Vue({
+            el:"#app"
+        })
+    </script>
+</body>
+</html>

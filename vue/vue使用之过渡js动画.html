@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>css动画</title>
+    <script src="./vue.js"></script>
+    <script src="https://cdn.bootcss.com/velocity/2.0.5/velocity.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <transition @before-enter="Before" @enter="Enter" @after-enter="After">
+            <div v-show="show">hello,51zxw</div>
+        </transition>
+        <button @click="change">改变</button>
+    </div>
+    <script>
+        var app = new Vue({
+            el:'#app',
+            data:{
+                show:true
+            },
+            methods:{
+                change:function(){
+                    this.show = !this.show
+                },
+                Before:function(el){
+                    el.style.opacity = 0
+                },
+                Enter:function(el,done){
+                    Velocity(el,{
+                        opacity:1,
+                        fontSize:'1.4rem'
+                    },{
+                        duration:300
+                    })
+                    Velocity(el,{
+                        fontSize:'1rem',
+                        complete:done
+                    })
+                },
+                After:function(el,done){
+                    Velocity(el,{
+                        rotateZ:'45deg',
+                        translateY:'30px',
+                        translateX:'30px',
+                        opacity:0
+                    },{
+                        duration:1000,
+                        complete:done
+                    })
+                }
+            }
+        })
+    </script>
+</body>
+</html>

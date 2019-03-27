@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>动态组件传值</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- keep-alive的作用：缓存动态组件之间的数据 -->
+        <keep-alive>
+            <component :is="sex"></component>
+        </keep-alive>
+        <button @click="change">切换</button>
+    </div>
+    <script>
+        Vue.component('boy',{
+            template:`<div> boy:<input type="text"></input></div>`
+        })
+        Vue.component('girl',{
+            template:`<div> girl:<input type="text"></input> </div>`
+        })
+        var app = new Vue({
+            el:"#app",
+            data:{
+                sex:'boy'
+            },
+            methods:{
+                change:function(){
+                    this.sex = this.sex==='boy'?'girl':'boy'
+                }
+            }
+        })
+    </script>
+</body>
+</html>

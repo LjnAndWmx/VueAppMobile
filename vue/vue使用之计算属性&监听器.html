@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <div>
+            1.计算属性：分离模板语法中的复杂逻辑<br>
+            2.计算属性和函数的区别(计算属性有缓存)<br>
+            3.侦听器：观察响应数据变动
+            <div>{{reverseMsg}}</div>
+        </div>
+    </div>
+    <script>
+        var app = new Vue({
+            el:"#app",
+            data:{
+                msg:'1234567'
+            },
+            // computed 计算数据，缓存计算好的数据，比函数要好
+            computed:{
+                reverseMsg:function(){
+                    return this.msg.split('').reverse().join('')
+                }
+            },
+            // watch。可以来响应数据的变化，最大用处当需要在数据变化时，执行异步或开销较大的操作时，最有用
+            watch:{
+                question:function(){}
+            }
+        })
+    </script>
+</body>
+</html>

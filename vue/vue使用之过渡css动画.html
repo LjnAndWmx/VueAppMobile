@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>css动画</title>
+    <script src="./vue.js"></script>
+    <link href="https://cdn.bootcss.com/animate.css/3.7.0/animate.min.css" rel="stylesheet">
+    <!-- 官方：第一种方案 -->
+    <!-- <style>
+        .fade-enter-active, .fade-leave-active {
+        transition: opacity .5s;
+        }
+        .fade-enter, .fade-leave-to {
+        opacity: 0;
+        }
+    </style> -->
+</head>
+<body>
+    <div id="app">
+        <!-- <transition name="fade">
+            <div v-show="show">hello,51zxw</div>
+        </transition> -->
+        <transition enter-active-class="animated bounce" leave-active-class="animated shake">
+            <div v-show="show">hello,51zxw</div>
+        </transition>
+        <button @click="change">改变</button>
+    </div>
+    <script>
+        var app = new Vue({
+            el:'#app',
+            data:{
+                show:true
+            },
+            methods:{
+                change:function(){
+                    this.show = !this.show
+                }
+            }
+        })
+    </script>
+</body>
+</html>

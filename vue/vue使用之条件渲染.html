@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue使用之条件渲染</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <div>
+            v-if与v-show区别:v-if如果为false，那么会把dom节点都没有了，而v-show如果为false,dom元素只是隐藏，display:none;并没有删除dom元素
+        </div>
+        <div v-if="flag" key="name">
+            <!-- key="name":作用是设置两个元素不一样，比如input标签不能复用 -->
+            <span>if-name</span><br>
+            <input type="text">
+        </div>
+        <div v-show="flag" key="name">
+            <span>show-name</span><br>
+            <input type="text">
+        </div>
+        <button @click="change">change</button>
+    </div>
+    <script>
+    var app = new Vue({
+        el:"#app",
+        data:{
+            flag:true
+        },
+        methods:{
+            change:function(){
+                this.flag = !this.flag
+            }
+        }
+    })
+    </script>
+</body>
+</html>

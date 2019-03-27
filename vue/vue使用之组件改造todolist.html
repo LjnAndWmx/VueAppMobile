@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>组件改造todolist</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <input v-model="info" type="text" @change="change">
+        <ul>
+            <!-- <li v-for="item of list">{{item}}</li> -->
+            <todo-list v-for="item of list" :item="item"></todo-list>
+        </ul>
+    </div>
+    <script>
+        // 全局组件
+        // Vue.component("TodoList",{
+        //     props:["item"],
+        //     template:`<li>{{item}}</li>`
+        // })
+        // 局部组件
+        var TodoList = {
+            props:["item"],
+            template:`<li>{{item}}</li>`
+        }
+        var app = new Vue({
+            el:"#app",
+            data:{
+                info:'',
+                list:[]
+            },
+            components:{
+                TodoList
+            },
+            methods:{
+                change:function(){
+                    this.list.push(this.info)
+                }
+            }
+        })
+    </script>
+</body>
+</html>

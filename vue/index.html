@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <div>
+            <div>vue三大优点:</div>
+            {{one}}<br>
+            {{two}}<br>
+            {{there}}
+        </div>
+        <div>
+            <div>vue使用的模板语法</div>
+            <div>插值(文本，原始HTML，表达式)</div>
+            <div>指令(todo-list)</div>
+        </div>
+    </div>
+    <script>
+    var app = new Vue({
+        el:"#app",
+        data(){
+            return {
+                one:'不用操作dom元素',
+                two:'数据驱动化',
+                there:'组件化'
+            }
+        }
+    })
+    </script>
+</body>
+</html>
