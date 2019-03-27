@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue-router基于路由过渡动效</title>
+    <script src="./vue.js"></script>
+    <script src="./vue-router.js"></script>
+    <link href="https://cdn.bootcss.com/animate.css/3.7.0/animate.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <div id="app">
+        <router-link to="/">去首页</router-link>
+        <router-link to="/list">去list页</router-link>
+        <router-link to="/detail">去list页</router-link>
+
+        <transition :enter-active-class="effect">
+            <router-view></router-view>
+        </transition>
+    </div>
+    <script>
+        var router = new VueRouter({
+            routes: [{
+                    path: '/',
+                    component: {
+                        template: '<div>首页</div>'
+                    }
+                },
+                {
+                    path: '/list',
+                    component: {
+                        template: '<div>list页</div>'
+                    }
+                },
+                {
+                    path: '/detail',
+                    component: {
+                        template: '<div>list页</div>'
+                    }
+                }
+            ]
+        })
+        var app = new Vue({
+            router,
+            data:{
+                effect:''
+            },
+            watch:{
+                '$route'(to,from){
+                    var effectMap={
+                        '/':'shake',
+                        '/list':'jello',
+                        '/detail':'bounce'
+                    }
+                    this.effect = ['animated',effectMap[to.path]].join(' ')
+                }
+            }
+        }).$mount('#app')
+    </script>
+</body>
+
+</html>

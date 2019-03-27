@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>vue-router导航守卫</title>
+    <!-- 在路由配置中，有些信息需要单独进行管理，为了存储着类型的数据，使用meta元素保存 -->
     <script src="./vue.js"></script>
     <script src="./vue-router.js"></script>
 </head>
@@ -30,14 +31,8 @@
                     component: {
                         template: '<div>用户页</div>'
                     },
-                    // 局部导航守卫
-                    beforeEnter:(to, from, next)=> {
-                        var login = false
-                        if (!login) {
-                            next('/login')
-                        } else {
-                            next()
-                        }
+                    meta:{
+                        flag:true
                     }
                 },
                 {
@@ -49,14 +44,17 @@
             ]
         })
         // 全局导航守卫
-        // router.beforeEach(function (to, from, next) {
-        //     var login = false
-        //     if (!login && to.path === '/user') {
-        //         next('/login')
-        //     } else {
-        //         next()
-        //     }
-        // })
+        router.beforeEach(function (to, from, next) {
+            var login = false
+            // console.log(to.matched)
+            if (!login && to.matched.some(function(item){
+                return item.meta.flag
+            })) {
+                next('/login')
+            } else {
+                next()
+            }
+        })
         var app = new Vue({
             router
         }).$mount('#app')

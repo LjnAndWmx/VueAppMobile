@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue-router路由基本过渡动效</title>
+    <script src="./vue.js"></script>
+    <script src="./vue-router.js"></script>
+    <link href="https://cdn.bootcss.com/animate.css/3.7.0/animate.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/velocity/2.0.5/velocity.min.js"></script>
+
+    <!-- <style>
+        .fade-enter-active, .fade-leave-active {
+        transition: opacity 1s;
+        }
+        .fade-enter, .fade-leave-to {
+        opacity: 0;
+        }
+    </style>  -->
+</head>
+
+<body>
+    <div id="app">
+        <router-link to="/">去首页</router-link>
+        <router-link to="/list">去list页</router-link>
+        <router-view></router-view>
+    </div>
+    <script>
+        var router = new VueRouter({
+            routes: [{
+                    path: '/',
+                    component: {
+                        // template: `
+                        // <transition name="fade">
+                        //     <div>首页</div>
+                        // </transition>
+                        // `
+                        // template: `
+                        // <transition enter-active-class="animated bounce" leave-active-class="animated shake">
+                        //     <div>首页</div>
+                        // </transition>
+                        // `
+                        template: `
+                        <transition @before-enter="Before" @enter="Enter" @after-enter="After">
+                            <div>首页</div>
+                        </transition>
+                        `,
+                        methods: {
+                            Before: function (el) {
+                                el.style.opacity = 0
+                            },
+                            Enter: function (el, done) {
+                                Velocity(el, {
+                                    opacity: 1,
+                                    fontSize: '1.4rem'
+                                }, {
+                                    duration: 3000
+                                })
+                                Velocity(el, {
+                                    fontSize: '1rem',
+                                    complete: done
+                                })
+                            },
+                            After: function (el, done) {
+                                Velocity(el, {
+                                    opacity: 0
+                                }, {
+                                    duration: 3000,
+                                    complete: done
+                                })
+                            }
+                        }
+                    }
+                },
+                {
+                    path: '/list',
+                    component: {
+                        template: '<div>list页</div>'
+                    }
+                }
+            ]
+        })
+
+        var app = new Vue({
+            router
+        }).$mount('#app')
+    </script>
+</body>
+
+</html>
